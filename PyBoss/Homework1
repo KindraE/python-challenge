@@ -108,7 +108,7 @@ with open(csvpath, newline="") as csvfile:
 #print(len(ID))
 
 #Column headers 
-header = ['ID', 'First Name', 'Last Name', 'DOB', 'SSN', 'State']
+header = ["ID", "First Name", "Last Name", "DOB", "SSN", "State"]
 new_employee_list = []
 #to create dictionaries of customers 
 for i in range(len(ID)):
@@ -126,15 +126,15 @@ for i in range(len(ID)):
 
 cleaned_csv = zip(ID, First_Name, Last_Name, DOB, SSN, State)
 
-# Set variable for output file
+#Set variable 
 output_file = os.path.join("new_employee_list.csv")
 
-#  Open the output file
+#Open output file
 with open(output_file, "w", newline="") as datafile:
     writer = csv.writer(datafile)
 
-    # Write the header row
+    #Write the header 
     writer.writerow(["ID", "First Name", "Last Name", "Birthdate", "SSN", "State"])
 
-    # Write in zipped rows
+    #Write zipped rows
     writer.writerows(cleaned_csv)
