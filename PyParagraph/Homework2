@@ -36,7 +36,7 @@ with open(csvpath, newline="") as csvfile:
             #loop through for each word
             for word in row:
                 #word contains a sentence ending punctuation.
-                if '.' in word or '?' in word or '!' in word:
+                if "." in word or "?" in word or "!" in word:
                     if len(word) > 2:                    
                         num_sentence += 1                        
                         # reset counter to 0
@@ -49,16 +49,16 @@ with open(csvpath, newline="") as csvfile:
                     #adding word per sentence count
                     word_sent_count += 1
                     #determine if word contains commas, colons
-                    if ',' in word or ';' in word or ':' in word:                        
+                    if "," in word or ";" in word or ":" in word:                        
                         word_length.append(len(word)-1)
                     else:                        
                         word_length.append(len(word))
 
 #determine number of words
 num_words = sum(num)
-#average number of leters rounded to two decimals
+#average number of leters 
 avg_word_length = round(mean(word_length), 2)
-# average sentence lenght in words
+#average sentence lenghth
 avg_sent_length = mean(w_per_sentence)
 #print analysis results
 print('')
@@ -71,17 +71,17 @@ print('Average sentence length: ' + str(avg_sent_length))
 print('')
 
 lines = [
-    'Paragraph Analysis', 
-    '----------------------------------', 
-    'Approximate Word Count: ' + str(num_words), 
-    'Approximate Sentence Count: ' + str(num_sentence),
-    'Average letter count: ' + str(avg_word_length),
-    'Average sentence length: ' + str(avg_sent_length)
+    "Paragraph Analysis", 
+    "----------------------------------", 
+    "Approximate Word Count: " + str(num_words), 
+    "Approximate Sentence Count: " + str(num_sentence),
+    "Average letter count: " + str(avg_word_length),
+    "Average sentence length: " + str(avg_sent_length)
     ]
-out = 'output_'
-analysis = '_analysis'
+out = "output_"
+analysis = "_analysis"
 file = out + file_name + analysis + form
-with open(file, 'w') as outfile:
+with open(file, "w") as outfile:
     for line in lines:
-        outfile.writelines('\n' + line)
+        outfile.writelines("\n" + line)
 
