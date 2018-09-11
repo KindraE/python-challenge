@@ -1,0 +1,79 @@
+print("hi")
+import os
+import csv
+
+#Create file path
+file_name = "election_data"
+form = ".csv"
+file = file_name + form
+filepath = os.path.join("..", "Resources", "election_data.csv")
+
+#print(filepath)
+
+#open folder and read CSV using csv.reader
+with open(filepath, newline="") as election_file:
+    election_data = csv.reader(election_file, delimiter=",")
+    #enumerate
+    next(election_data)
+    #print(election_data)
+    
+    num_votes = 0
+    candidate_votes = []
+    #loop through each row in the file
+    for row in election_data:
+        #increment number of votes
+        num_votes += 1
+        
+        candidate_votes.append(row[-1])
+
+votes_per_candidate = {}
+candidates = set(candidate_votes)
+winning_votes = 0
+for candidate in candidates:
+    votes = 0
+    for vote in candidate_votes:
+        if vote == candidate:
+            votes += 1
+    percent_votes = (votes / num_votes) * 100
+    votes_per_candidate[candidate] = [votes, percent_votes]
+    if votes > winning_votes:
+        winner = candidate
+        winning_votes = votes
+print("")
+print("Election Results")
+print("-------------------")
+print("Total Votes: " + str(num_votes))
+print("-------------------")
+
+for candidate in candidates:
+    print(
+          candidate + ": " 
+          + str(round(votes_per_candidate[candidate][1], 2)) + " "
+          + "(" + str(votes_per_candidate[candidate][0]) + ")"
+         )
+
+print("-------------------")
+print("Winner: " + winner)
+print("-------------------")
+print("") 
+
+#write output file
+poll_results = "_poll_results"
+form = ".txt"
+file = file_name + poll_results + form
+with open(file, "w") as outfile:
+    outfile.writelines("\n" + "ELection Results")
+    outfile.writelines("\n" + "-------------------")
+    outfile.writelines("\n" + "Total Votes: " + str(num_votes))
+    outfile.writelines("\n" + "-------------------")
+    for candidate in candidates:
+        outfile.writelines(
+                        "\n" +
+                        candidate + ": " 
+                        + str(round(votes_per_candidate[candidate][1], 2)) + " "
+                        + "(" + str(votes_per_candidate[candidate][0]) + ")"
+                          )
+    outfile.writelines("\n" + "-------------------")
+    outfile.writelines("\n" + "Winner: " + winner)
+    outfile.writelines("\n" + "-------------------")
+    
